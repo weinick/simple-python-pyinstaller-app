@@ -1,19 +1,18 @@
 pipeline {
     agent none 
-	podTemplate {
-    node(jenkins-slave) {
+	podTemplate(containers: [
+    containerTemplate(name: 'add2vals', image: 'python:2-alpine', ttyEnabled: true, command: 'cat')
+  ]) {
+    node(POD_LABEL) {
     stages {
+	  container('add2vals'){
         stage('Build') { 
-            agent {
-                docker {
-                    image 'python:2-alpine' 
-                }
-            }
             steps {
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
         }
+	  }
     }
 	}
 	}
