@@ -1,5 +1,5 @@
 pipeline {
-    agent none 
+    agent any 
 	podTemplate(containers: [
     containerTemplate(name: 'add2vals', image: 'python:2-alpine', ttyEnabled: true, command: 'cat')
   ]) {
