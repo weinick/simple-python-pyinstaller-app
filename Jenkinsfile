@@ -1,5 +1,7 @@
 pipeline {
     agent none 
+	podTemplate {
+    node(jenkins-slave) {
     stages {
         stage('Build') { 
             agent {
@@ -13,4 +15,6 @@ pipeline {
             }
         }
     }
+	}
+	}
 }
