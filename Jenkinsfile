@@ -4,7 +4,7 @@ pipeline {
     containerTemplate(name: 'add2vals', image: 'python:2-alpine', ttyEnabled: true, command: 'cat')
   ]) {
     node(POD_LABEL) {
-    stages {
+    stage('Deploy app add2vals'){
 	  container('add2vals'){
         stage('Build') { 
             steps {
