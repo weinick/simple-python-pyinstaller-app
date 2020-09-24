@@ -1,7 +1,8 @@
-podTemplate(containers:[
+def label = "add2vals"
+podTemplate(label: label, containers:[
     containerTemplate(name: 'add2vals', image: 'python:2-alpine', ttyEnabled: true, command: 'cat')
   ]) {
-    node() {
+    node(label) {
     stage('Deploy app add2vals'){
 	  git 'https://github.com/weinick/simple-python-pyinstaller-app.git'
 	  container('add2vals'){
