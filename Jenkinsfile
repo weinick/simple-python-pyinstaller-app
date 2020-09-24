@@ -1,16 +1,17 @@
 def label = "add2vals"
 podTemplate(label: label, containers:[
     containerTemplate(name: 'add2vals', 
-	image: 'python:2-alpine', 
+	image: 'maven:3.3.9-jdk-8-alpine', 
 	ttyEnabled: true, 
 	command: 'cat')
   ]) {
     node(label) {
     stage('Deploy app add2vals'){
-	  git 'https://github.com/weinick/simple-python-pyinstaller-app.git'
+	  git 'https://github.com/jenkinsci/kubernetes-plugin.git'
 	  container('add2vals'){
         stage('Build') { 
-            sh 'hostname'
+            sh 'mvn -DskipTests -B clean install'
+
         }
 	  }
     }
