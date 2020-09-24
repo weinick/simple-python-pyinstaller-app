@@ -1,10 +1,9 @@
-pipeline {
-    agent any 
-	podTemplate(containers: [
+podTemplate(containers:[
     containerTemplate(name: 'add2vals', image: 'python:2-alpine', ttyEnabled: true, command: 'cat')
   ]) {
-    node(POD_LABEL) {
-    stages('Deploy app add2vals'){
+    node() {
+    stage('Deploy app add2vals'){
+	  git 'https://github.com/jenkinsci/kubernetes-plugin.git'
 	  container('add2vals'){
         stage('Build') { 
             steps {
