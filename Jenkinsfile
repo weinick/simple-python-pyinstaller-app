@@ -3,7 +3,7 @@ podTemplate(containers:[
   ]) {
     node() {
     stage('Deploy app add2vals'){
-	  git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+	  git 'https://github.com/weinick/simple-python-pyinstaller-app.git'
 	  container('add2vals'){
         stage('Build') { 
             steps {
