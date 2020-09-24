@@ -10,11 +10,7 @@ podTemplate(label: label, containers:[
 	  git 'https://github.com/weinick/simple-python-pyinstaller-app.git'
 	  container('add2vals'){
         stage('Build') { 
-            steps {
-			    cd simple-python-pyinstaller-app
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
-                stash(name: 'compiled-results', includes: 'sources/*.py*') 
-            }
+            sh 'hostname'
         }
 	  }
     }
