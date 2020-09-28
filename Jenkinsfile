@@ -6,7 +6,7 @@ podTemplate(containers:[
   ]) {
     node() {
     stage('Deploy app add2vals'){
-	  git 'https://github.com/jenkinsci/kubernetes-plugin.git
+	  git 'https://github.com/jenkinsci/kubernetes-plugin.git'
 	  container('maven'){
 	   stage('Build a Maven project')
         sh 'mvn -DskipTests -B clean install'
