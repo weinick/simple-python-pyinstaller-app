@@ -1,4 +1,4 @@
-def label = "master"
+def label = "jenkins-slave-jnlp1"
 podTemplate(containers:[
     containerTemplate(name: 'maven', 
 	image: 'maven:3.3.9-jdk-8-alpine', 
