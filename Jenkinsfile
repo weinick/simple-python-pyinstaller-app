@@ -1,20 +1,18 @@
 def label = "jenkins-slave-jnlp1"
-podTemplate(label: label, containers:[
-    containerTemplate(name: 'add2vals', 
-	image: 'python:3-alpine', 
-	ttyEnabled: true, 
-	command: 'cat')
+podTemplate(containers: [
+  containerTemplate(name: 'maven', image: 'maven:3.6.0-jdk-8-alpine', ttyEnabled: true, command: 'cat')
+  ], volumes: [
+  persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-repo', readOnly: false)
   ]) {
-    node(label) {
-    stage('Deploy app add2vals'){
-	  git 'https://github.com/weinick/simple-python-pyinstaller-app.git'
-	  container('add2vals'){
-                sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
-                stash(name: 'compiled-results', includes: 'sources/*.py*') 
-            }
 
-        }
-	  }
+  node(label) {
+    stage('Build a Maven project') {
+      git 'https://github.com/jenkinsci/kubernetes-plugin.git'
+      container('maven') {
+          sh 'mvn -B clean package'
+      }
     }
+  }
+}
 
 
