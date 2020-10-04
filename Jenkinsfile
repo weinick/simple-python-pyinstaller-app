@@ -9,8 +9,6 @@ podTemplate(label: label, containers:[
     stage('Deploy app add2vals'){
 	  git 'https://github.com/weinick/simple-python-pyinstaller-app.git'
 	  container('add2vals'){
-
-			    sh 'cd simple-python-pyinstaller-app'
                 sh 'python -m py_compile sources/add2vals.py sources/calc.py' 
                 stash(name: 'compiled-results', includes: 'sources/*.py*') 
             }
